@@ -1,0 +1,17 @@
+.header-wrapper {
+    top: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1000;
+    position: fixed;
+    height: var(--height-header-default);
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12);
+    background: #000;
+    color: #fff;
+}
+
+.row-app {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
