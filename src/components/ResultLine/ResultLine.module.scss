@@ -1,0 +1,25 @@
+.popper {
+    width: 100%;
+    padding: 9px 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+
+    .icon {
+        font-size: 1.5rem;
+        margin-right: 8px;
+    }
+
+    .info {
+        flex: 0 1 auto;
+        font-size: 1.6rem;
+        font-weight: 600;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &:hover {
+        background: rgba(22, 24, 35, 0.03);
+    }
+}
