@@ -1,14 +1,10 @@
+import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { Fragment, useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import Tippy from '@tippyjs/react';
-import HeadlessTippy from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-    faMagnifyingGlass,
-    faSpinner,
-    faCircleXmark,
     faPlus,
     faEllipsisVertical,
     faEarthAsia,
@@ -24,14 +20,14 @@ import {
     faSignOut,
 } from '@fortawesome/free-solid-svg-icons';
 
+import config from '~/configs';
 import images from '~/assets/images';
 import styles from './Header.module.scss';
-import { Wrapper as PopperWrapper, MenuList } from '~/components/Popper';
-import { ResultLine } from '~/components/ResultLine';
-import { AccountItem } from '~/components/AccountItem';
 import Button from '~/components/Button';
 import ButtonDarkMode from '~/components/Button/ButtonDarkMode';
 import Image from '~/components/Image';
+import Search from '~/layouts/components/Search';
+import { MenuList } from '~/components/Popper';
 
 const cx = classNames.bind(styles);
 
@@ -77,14 +73,7 @@ const LIST_ITEM = [
 ];
 
 function Header() {
-    const [visible, setVisible] = useState([]);
     const currentUser = true;
-
-    useEffect(() => {
-        setTimeout(() => {
-            setVisible([]);
-        }, 0);
-    }, []);
 
     const handleChange = (menuItem) => {
         switch (menuItem.type) {
@@ -124,52 +113,18 @@ function Header() {
         <div className={cx('wrapper', 'row-app')}>
             {/* Logo Header */}
             <div className={cx('logo')}>
-                <Link to="/">
+                <Link to={config.routes.home}>
                     <img src={images.logo} alt="" />
                 </Link>
             </div>
 
             {/* Group search */}
-            <HeadlessTippy
-                interactive
-                visible={visible.length > 0}
-                render={(attrs) => (
-                    <div className={cx('popper')} tabIndex="-1" {...attrs}>
-                        <PopperWrapper>
-                            <ResultLine />
-                            <ResultLine />
-                            <ResultLine />
-                            <ResultLine />
-                            <ResultLine />
-                            <span className={cx('title')}>Accounts</span>
-                            <AccountItem />
-                            <AccountItem />
-                            <AccountItem />
-                            <AccountItem />
-                            <AccountItem />
-                            <div className={cx('more')}>View all results for "vtv"</div>
-                        </PopperWrapper>
-                    </div>
-                )}
-            >
-                <div className={cx('search')}>
-                    <input placeholder="Search" />
-                    <button className={cx('btn-clear')}>
-                        <FontAwesomeIcon icon={faCircleXmark} />
-                    </button>
-                    <button className={cx('btn-loading')}>
-                        <FontAwesomeIcon icon={faSpinner} />
-                    </button>
-                    <button className={cx('btn-search')}>
-                        <FontAwesomeIcon icon={faMagnifyingGlass} />
-                    </button>
-                </div>
-            </HeadlessTippy>
+            <Search />
 
             {/* Group action */}
             <div className={cx('action')}>
                 <Button outline leftIcon={<FontAwesomeIcon icon={faPlus} />}>
-                    Update
+                    Upload
                 </Button>
                 {currentUser ? (
                     <Fragment>
